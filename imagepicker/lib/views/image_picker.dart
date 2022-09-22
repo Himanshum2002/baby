@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+// import 'package:video_player/video_player.dart';
+
 
 class ImagePickerScreen extends StatefulWidget {
   const ImagePickerScreen({Key? key}) : super(key: key);
@@ -12,6 +16,8 @@ class ImagePickerScreen extends StatefulWidget {
 }
 
 class _ImagePickerScreenState extends State<ImagePickerScreen> {
+
+  // File _image;
 
   File? selectedImage;
   String base64Image ="";
@@ -48,7 +54,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
           foregroundColor: Colors.black,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(0.0),
           child:Center(
             child: ListView(
               children: [
@@ -59,7 +65,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                 ),
 
                    Padding(
-                    padding: const EdgeInsets.all(8), // Border radius
+                    padding: const EdgeInsets.all(0), // Border radius
                     child: ClipRRect(
                         child: selectedImage != null
                             ? Image.file(
@@ -86,7 +92,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                       label: Text("Click a Photo"), //label text
                       style: ElevatedButton.styleFrom(
                           primary: Colors.redAccent,
-                          side: BorderSide(width:3, color:Colors.white), //border width and color
+                          side: BorderSide(width:6, color:Colors.white), //border width and color
                           elevation: 3, //elevation of button
                           shape: RoundedRectangleBorder( //to set border radius to button
                               borderRadius: BorderRadius.circular(10)
@@ -102,7 +108,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                         label: Text("Select a Photo"), //label text
                         style: ElevatedButton.styleFrom(
                             primary: Colors.redAccent,
-                            side: BorderSide(width:3, color:Colors.white),
+                            side: BorderSide(width:4, color:Colors.white),
                             alignment: Alignment.center,//border width and color
                             elevation: 3, //elevation of button
                             shape: RoundedRectangleBorder( //to set border radius to button
@@ -113,6 +119,37 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                       ),
                     ],
                   ),
+
+            Column(
+                children: [
+                ElevatedButton.icon(
+                onPressed: () {
+                  Fluttertoast.showToast(
+                      msg: "Saved",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+          },
+            icon: Icon(Icons.save_alt),  //icon data for elevated button
+            label: Text("Save"), //label text
+            style: ElevatedButton.styleFrom(
+                primary: Colors.redAccent,
+                side: BorderSide(width:6, color:Colors.white), //border width and color
+                elevation: 3, //elevation of button
+                shape: RoundedRectangleBorder( //to set border radius to button
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                padding: EdgeInsets.fromLTRB(35, 15, 35, 15) //content padding inside button
+            ),
+                ),
+          ]
+        ),
+
+
                 Image.asset(
                   'assets/images/points.jpg',
                   fit: BoxFit.cover,
@@ -121,6 +158,19 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
             ),
           )
         ));
+
+    // void pickimage() async()
+    // {
+    //   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    //   setState(() {
+    //     _image=image;
+    //   });
+    // }
+
+    // void Saveimage(){
+    //   SharedPre
+    // }
+
 
   }
 }
